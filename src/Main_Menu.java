@@ -1,6 +1,7 @@
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Scanner;
 
 
@@ -18,6 +19,7 @@ public class Main_Menu {//jdbc:mysql://127.0.0.1:3306/?user=root
 
         try{
             Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement=connection.createStatement();
             while(true){
                 System.out.println();
                 System.out.println("======================⟪⟪ HOTEL MANAGEMENT " +
@@ -33,19 +35,19 @@ public class Main_Menu {//jdbc:mysql://127.0.0.1:3306/?user=root
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
-                        ReserveRoom.reserveRoom(connection, scanner);
+                        ReserveRoom.reserveRoom(statement, scanner);
                         break;
                     case 2:
-                        ViewReservation.viewReservations(connection);
+                        ViewReservation.viewReservations(statement);
                         break;
                     case 3:
-                        GetRoomNumber.getRoomNumber(connection, scanner);
+                        GetRoomNumber.getRoomNumber(statement, scanner);
                         break;
                     case 4:
-                        UpdateReservation.updateReservation(connection, scanner);
+                        UpdateReservation.updateReservation(statement, scanner);
                         break;
                     case 5:
-                        DeleteReservation.deleteReservation(connection, scanner);
+                        DeleteReservation.deleteReservation(statement, scanner);
                         break;
                     case 0:
                         exit();
@@ -55,7 +57,6 @@ public class Main_Menu {//jdbc:mysql://127.0.0.1:3306/?user=root
                         System.out.println("Invalid choice. Try again.");
                 }
             }
-
         }catch (SQLException e){
             System.out.println(e.getMessage());
         } catch (InterruptedException e) {

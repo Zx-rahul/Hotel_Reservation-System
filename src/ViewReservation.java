@@ -1,14 +1,12 @@
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ViewReservation {
-     static void viewReservations(Connection connection) throws SQLException {
-        String sql = "SELECT reservation_id, guest_name, room_number, contact_number, reservation_date FROM reservations";
+     static void viewReservations(Statement statement) throws SQLException {
+         String sql = "SELECT reservation_id, guest_name, room_number, contact_number, reservation_date FROM reservations";
 
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
+        try (ResultSet resultSet = statement.executeQuery(sql)) {
 
             System.out.println("Current Reservations:");
             System.out.println("+----------------+-----------------+---------------+----------------------+-------------------------+");
